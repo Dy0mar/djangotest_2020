@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p class="text-right">
+    <a href="{% url 'transaction-update' pk=object.pk %}">Edit</a> |
+    <a href="{% url 'transaction-delete' pk=object.pk %}">Delete</a>
+  </p>
+
+
+  <div class="mt-1 mb-1">
+    <p class="text-info">{{ object.transaction_id }} </p>
+    <div>{{ object.purpose }}</div>
+  </div>
+  <p class="text-muted">Transaction {{ object.transaction_id }}</p>
+  <p class="text-muted small text-lg-left">created: {{ object.created }}, updated {{ object.updated }}</p>
+  <hr>
+
+{% endblock %}

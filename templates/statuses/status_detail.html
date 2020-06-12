@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p class="text-right">
+    <a href="{% url 'status-update' pk=object.pk %}">Edit</a> |
+    <a href="{% url 'status-delete' pk=object.pk %}">Delete</a>
+  </p>
+
+
+  <div class="mt-1 mb-1">
+    <p class="text-info">{{ object.name }} </p>
+  </div>
+  <p class="text-muted">Name {{ object.name }}</p>
+  <p class="text-muted small text-lg-left">created: {{ object.created }}, updated {{ object.updated }}</p>
+  <hr>
+
+{% endblock %}

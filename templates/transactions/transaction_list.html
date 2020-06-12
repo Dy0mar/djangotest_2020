@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p class="text-right">
+    <a href="{% url 'transaction-create' %}">Create new transaction</a>
+  </p>
+  {% if object_list %}
+    {% for T in object_list %}
+      <div class="m	t-1 mb-1">
+        <h4><a href="{{ T.get_absolute_url }}">Transaction: {{ T.transaction_id }} </a></h4>
+        <p>Назначение платежа: {{ T.purpose }}</p>
+        <p>Status: {{ T.status.name|default_if_none:'--' }}</p>
+        <p class="text-muted small text-lg-left">created: {{ T.created }}, updated {{ T.updated }}</p>
+      </div>
+      <hr>
+    {% endfor %}
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+            <a href="{{ next_link }}?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="{{ next_link }}?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  {% else %}
+    <h2>Transactions</h2>
+    <p>No transaction found!</p>
+  {% endif %}
+{% endblock %}
